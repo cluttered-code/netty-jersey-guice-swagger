@@ -11,11 +11,12 @@
     <properties>
         <guice.version>4.1.0</guice.version>
 
-        <!-- NEEDS TO MATCH other org.glassfish.hk2 dependency version -->
+        <!-- NEEDS TO MATCH other org.glassfish.hk2 dependency versions -->
         <guice-bridge.version>2.5.0-b30</guice-bridge.version>
 
         <jersey.version>2.25</jersey.version>
         <servlet-api.version>3.1.0</servlet-api.version>
+        <slf4j.version>1.7.21</slf4j.version>
         <swagger.version>1.5.10</swagger.version>
         <swagger-ui.version>2.2.8</swagger-ui.version>
         <!-- Build -->
@@ -36,12 +37,6 @@
             <groupId>org.glassfish.hk2</groupId>
             <artifactId>guice-bridge</artifactId>
             <version>${guice-bridge.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.inject</groupId>
-                    <artifactId>guice</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
@@ -67,6 +62,16 @@
             <groupId>org.webjars</groupId>
             <artifactId>swagger-ui</artifactId>
             <version>${swagger-ui.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
         <!-- Testing -->
         <dependency>
@@ -114,7 +119,7 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.ca.saas.weatherglass.Server</mainClass>
+                                    <mainClass>com.ca.saas.weatherglass.AppServer</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

@@ -1,5 +1,6 @@
 package com.ca.saas.weatherglass.resource;
 
+import com.ca.saas.weatherglass.service.PongService;
 import io.swagger.annotations.Api;
 
 import javax.inject.Inject;
@@ -22,21 +23,23 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 @Produces(APPLICATION_JSON)
 public class PingResource {
 
-    public static final String PONG = "\"pong\"";
+    private final PongService pongService;
 
     @Inject
-    private PingResource() {}
+    private PingResource(final PongService pongService) {
+        this.pongService = pongService;
+    }
 
     @GET
     public String ping() {
-        return PONG;
+        return pongService.getPong();
     }
 
     @GET
     @Path("/async")
     public void asyncPing(@Suspended final AsyncResponse response) {
         new Thread(() ->
-            response.resume(Response.ok(PONG).build())
+            response.resume(Response.ok(pongService.getPong()).build())
         ).start();
     }
 }
